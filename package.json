@@ -1,5 +1,5 @@
 {
-  "name": "foodTracker",
+  "name": "http_example NN",
   "private": true,
   "scripts": {
     "start": "meteor run",

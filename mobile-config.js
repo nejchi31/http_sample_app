@@ -5,7 +5,7 @@ App.info({
   description: '...Http Example App...',
   author: 'Nejc Necemer - L-tek.si',
   email: 'nejc.necemer@gmail.si',
-  version: "0.1.0"
+  version: "1.0.0"
 });
 
 // Set up resources such as icons and launch screens.
@@ -34,3 +34,5 @@ App.appendToConfig(`
     <host name="localhost:3000" />
   </universal-links>
 `);
+App.accessRule('http://api.vx1.ekranj.si/v5/sources/14d1aad8-49a9-44eb-aba3-94feb70e184d/*');
+App.accessRule('http://api.vx1.ekranj.si/*');

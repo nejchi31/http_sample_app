@@ -13,8 +13,10 @@ import store from './store.js';
 
 Meteor.startup(() => {
 
+  
+
 window.onload = function(e){
-  hammerIt(document.getElementById("render-target"))
+  hammerIt(document.getElementById("render-target"));
 }
 
 render(

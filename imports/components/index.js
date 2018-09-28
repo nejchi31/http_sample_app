@@ -147,6 +147,35 @@ class Index extends Component {
 
   //GUI elements
   render () {
+
+  if (Meteor.isCordova) {
+      cordova.plugins.diagnostic.requestRuntimePermissions(function(statuses){
+          for (var permission in statuses){
+              switch(statuses[permission]){
+                  case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                      console.log("Permission granted to use "+permission);
+                      break;
+                  case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                      console.log("Permission to use "+permission+" has not been requested yet");
+                      break;
+                  case cordova.plugins.diagnostic.permissionStatus.DENIED:
+                      console.log("Permission denied to use "+permission+" - ask again?");
+                      break;
+                  case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                      console.log("Permission permanently denied to use "+permission+" - guess we won't be using it then!");
+                      break;
+              }
+          }
+      }, function(error){
+          console.error("The following error occurred: "+error);
+      },[
+          cordova.plugins.diagnostic.permission.ACCESS_FINE_LOCATION,
+          cordova.plugins.diagnostic.permission.ACCESS_COARSE_LOCATION,
+          cordova.plugins.diagnostic.permission.READ_EXTERNAL_STORAGE,
+          cordova.plugins.diagnostic.permission.WRITE_EXTERNAL_STORAGE,
+          cordova.plugins.diagnostic.permission.BODY_SENSORS
+      ]);}
+
    const { classes } = this.props;
 
    if(this.props.data.event_data.length==0){
