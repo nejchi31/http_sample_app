@@ -31,12 +31,14 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     maxWidth: '100%',
-    paddingBottom: theme.spacing.unit * 4,
-    paddingRight: theme.spacing.unit * 4,
-    paddingLeft: theme.spacing.unit * 4,
-    marginBottom: theme.spacing.unit * 2,
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit,
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
     background: 'linear-gradient(to right, #ffffff 52%,#d8d8d8 100%)',
   },
   image: {
@@ -44,27 +46,41 @@ const styles = theme => ({
     height: 'auto',
   },
   img: {
-    borderRadius: '25px',
+    borderRadius: '15px',
     margin: 'auto',
     display: 'block',
-    maxWidth: 64,
-    maxHeight: 64,
+    maxWidth: 48,
+    maxHeight: 48,
   },
   progress: {
     margin: theme.spacing.unit * 2,
   },
   button: {
-    margin: theme.spacing.unit,
-    minHeight: 8,
-    maxHeight: 32,
-    minWidth: 16,
+    margin: 2,
+    minHeight: 4,
+    minWidth: 6,
+    maxWidth: 6,
   },
   indxElevation2: {
     boxShadow:'none',
   },
   iconff: {
+    width: 8,
+    height: 8,
     transform:'rotate(90deg)',
   },
+  icon: {
+    width: 8,
+    height: 8,
+  },
+  inputLab: {
+    fontSize: 8,
+  },
+  inputSetting: {
+    height: 6,
+    width: 32,
+  },
+
 });
 
 
@@ -140,16 +156,14 @@ class Index extends Component {
         <MuiThemeProvider theme={theme.theme}>
          {this.props.data.event_data.map((item, index) =>
             <Paper className={classes.root} key={item + index + "paper"}>
-              <Grid container spacing={16} style={{height: '10vh'}}>
-                <Grid item xs={4} sm={4} style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                  <Link to={"/dogodki/" + item.id} style={{textDecoration: "none"}}>
+              <Grid container spacing={16} style={{height: '75px'}}  direction="row" >
+                <Grid item xs={2} sm={3} style={{marginTop: 'auto', marginBottom: 'auto'}}>
                     <Paper classes={{root: classes.image, elevation2: classes.indxElevation2}}>
                       <img className={classes.img} alt="complex" src={item.thumb} />
                     </Paper>
-                  </Link>
                 </Grid>
-                <Grid item xs={8} sm={4} container>
-                  <Grid item xs container direction="column" spacing={16}>
+                <Grid item xs={10} sm={9} direction="row" container>
+                  <Grid item xs container spacing={16}>
                     <Grid item xs>
                       <Typography gutterBottom variant="subheading">
                         {item.title}
@@ -157,43 +171,49 @@ class Index extends Component {
                       <Typography gutterBottom>{item.start}</Typography>
                       <Typography color="textSecondary">{item.location}</Typography>
                     </Grid>
-                    <Grid item>
-                      <FormControl>
-                        <InputLabel shrink htmlFor="priority">Vnesi prioriteto</InputLabel>
-                        <Input
-                            id={"priority_" + index}
-                            onChange={(event)=>{this.setState({priority: event.target.value})}}
-                          />
-                        <div style={{display: 'flex', flexDirection: 'row'}}>
-                          <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "input")}>
-                              Potrdi
-                          </Button>
-                          <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "increase")}>
-                              <ExposurePlus1 />
-                            </Button>
-                            <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "decrease")}>
-                              <ExposureNeg1 />
-                            </Button>
-                          </div>
-                          <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "top")}>
-                              <FastForward className={classes.iconff} style={{transform: 'rotate(270deg)'}} />
-                            </Button>
-                            <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "bottom")}>
-                              <FastForward className={classes.iconff} />
-                            </Button>
-                          </div>
-                        </div>
-                      </FormControl>
-                    </Grid>
                   </Grid>
+                  <Grid item xs={4} sm={4} container>
+                    <Grid item sm container direction="row" spacing={16}>
+                        <FormControl style={{padding: '2px'}}>
+                          <InputLabel classes={{root: classes.inputLab}} shrink htmlFor="priority">Vnesi prioriteto</InputLabel>
+                          <Input
+                              style={{height: '8px', padding: '0px'}}
+                              fullWidth
+                              id={"priority_" + index}
+                              onChange={(event)=>{this.setState({priority: event.target.value})}}
+                            />
+                          <div style={{display: 'flex', flexDirection: 'row'}}>
+                            <Button variant="contained" color="primary" classes={{root: classes.button, label: classes.inputLab}} onClick={this.activateUpdateHandler.bind(this, item.id, index, "input")}>
+                                Potrdi
+                            </Button>
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                              <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "increase")}>
+                                <ExposurePlus1 className={classes.icon}  />
+                              </Button>
+                              <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "decrease")}>
+                                <ExposureNeg1 className={classes.icon}  />
+                              </Button>
+                            </div>
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                              <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "top")}>
+                                <FastForward className={classes.iconff} style={{transform: 'rotate(270deg)'}} />
+                              </Button>
+                              <Button variant="contained" color="primary" className={classes.button} onClick={this.activateUpdateHandler.bind(this, item.id, index, "bottom")}>
+                                <FastForward className={classes.iconff} />
+                              </Button>
+                            </div>
+                          </div>
+                        </FormControl>
+                      </Grid>
+                    </Grid>
                   <Grid item>
                     <Typography variant="title">Prioriteta: {item.weight}</Typography>
                   </Grid>
-                  <Grid item>
-                    <Forward />
-                  </Grid>
+                  <Link to={"/dogodki/" + item.id} style={{textDecoration: "none"}}>
+                    <Grid item>
+                      <Forward className={classes.iconRedirect} style={{paddingTop: '20px', color: "black"}} />
+                    </Grid>
+                  </Link>
                 </Grid>
               </Grid>
             </Paper>
@@ -210,8 +230,8 @@ class Index extends Component {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button variant="contained" onClick={()=>{this.setState({ alertopen: false })}} color="primary">
-                V redu
+              <Button variant="contained" classes={{root: classes.button, label: classes.inputLab}} onClick={()=>{this.setState({ alertopen: false })}} color="primary">
+                OK
               </Button>
             </DialogActions>
           </Dialog>

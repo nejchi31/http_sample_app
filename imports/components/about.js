@@ -16,6 +16,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 
 const styles = theme => ({
@@ -25,7 +26,7 @@ const styles = theme => ({
     maxWidth: '100%',
     padding: theme.spacing.unit,
     margin: theme.spacing.unit,
-    backgroundColor:'linear-gradient(to bottom, #cc3030 1%,#ffffff 100%)',
+    background:'linear-gradient(to right, #d8d8d8 0%,#ffffff 48%)',
   },
   image: {
     width: 'auto',
@@ -50,6 +51,10 @@ const styles = theme => ({
   indxElevation2: {
     boxShadow:'none',
   },
+  divider: {
+    marginTop: 2,
+    marginBottom: 2,
+  }
 });
 
 
@@ -59,6 +64,7 @@ class About extends React.Component {
     this.state = {
       item: null,
     }
+    //loading data from selected item
     this.props.getActiveItem(this.props.match.params.id)
   }
 
@@ -82,6 +88,7 @@ class About extends React.Component {
                     </Typography>
                     <Typography gutterBottom>{this.props.data.current_item.start}</Typography>
                     <Typography color="textSecondary">{this.props.data.current_item.location}</Typography>
+                    <Divider classes={{root: classes.divider}} />
                     <Typography color="textSecondary">{this.props.data.current_item.short_description}</Typography>
                   </Grid>
                   <Grid item xs={6} sm={6} style={{marginTop: 'auto', marginBottom: 'auto'}}>

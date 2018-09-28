@@ -38,9 +38,10 @@ export  const theme = createMuiTheme({
         fontSize: 10,
       },
       subheading: {
-        fontSize: 12,
+        fontSize: 9,
+        fontWeight: 'bold',
       },
-      textSecondary: {
+      body1: {
         fontSize: 8,
       },
     },
