@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+body {
+  margin: 0px;
+  font-family: "Inconsolata";
+  background-color: '#4b4c4f';
+  height: '100%';
+}
+
+.render-target {
+  background-color: '#4b4c4f';
+}
